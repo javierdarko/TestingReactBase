@@ -6,7 +6,6 @@ export const GlobalHeader = ({ toggleTheme, isDarkMode }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-
   return (
     <>
       <ContainerFlex
