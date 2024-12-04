@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import store from "./config/store";
+import { HomeIndex } from "./components/MainComponent";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+import { darkTheme, lightTheme } from "./components/themes";
+import { GlobalStyles } from "./components/GlobalStyles";
+
+const persistor = persistStore(store);
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+          <GlobalStyles />
+
+          <HomeIndex toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
   );
 }
 
