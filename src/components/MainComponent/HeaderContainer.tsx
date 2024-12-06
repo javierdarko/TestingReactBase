@@ -1,50 +1,69 @@
 import React, { useState } from "react";
-import { ContainerFlex, Image, Text } from "../styles";
-import HamburgerIcon from "../images/menu.svg"; // Ícono de menú hamburguesa
+import {
+  ContainerFlex,
+  DesktopMenu,
+  HamburgerMenuIcon,
+  Image,
+  MenuContainer,
+  Text,
+} from "../styles";
+import HamburgerIcon from "../images/menu.svg";
+import IconPoke from "../images/pokemon-23.svg";
+import { MENULIST } from "../constants";
 
 export const GlobalHeader = ({ toggleTheme, isDarkMode }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
   return (
     <>
       <ContainerFlex
-        Justify="start"
+        Justify="space-between"
         Height="40px"
-        Padding="8px 16px"
-        Border="solid green 1px"
-        Background="#fff"
+        Padding="16px"
+        Background="#FF2400"
         Gap="16px"
       >
         <Image
-          src={HamburgerIcon}
-          alt="Menu Icon"
-          Width="24px"
-          Height="24px"
-          onClick={toggleMenu}
+          src={IconPoke}
+          alt="Pokémon Logo"
+          Width="90px"
+          Height="40px"
           Cursor="pointer"
         />
-        <Text Color="#0D166B" FontWeight="700" Cursor="pointer">
-          Menu
-        </Text>
-        <Text Color="#0D166B" FontWeight="700" Cursor="pointer">
-          Otro
-        </Text>
+        <ContainerFlex Justify="flex-end" Gap="16px" Margin="16px">
+          <HamburgerMenuIcon
+            src={HamburgerIcon}
+            alt="Menu Icon"
+            Width="24px"
+            Height="24px"
+            onClick={toggleMenu}
+            Cursor="pointer"
+          />
+          <DesktopMenu>
+            <Text Color="#F3F3F3" FontWeight="700" Cursor="pointer">
+              {MENULIST.MENU}
+            </Text>
+            <Text Color="#F3F3F3" FontWeight="700" Cursor="pointer">
+              {MENULIST.RANDOM}
+            </Text>
+            <ContainerFlex Justify="start"Width="fit-content">
+              <Text
+                Color="#F3F3F3"
+                FontWeight="700"
+                Cursor="pointer"
+                onClick={toggleTheme}
+              >
+                {MENULIST.MODE}{' '}
+                {isDarkMode ? MENULIST.LIGHT : MENULIST.DARK}
+              </Text>
+            </ContainerFlex>
+          </DesktopMenu>
+        </ContainerFlex>
       </ContainerFlex>
       {isMenuOpen && (
-        <ContainerFlex
-          Position="absolute"
-          PositionTop="40px"
-          PositionLeft="0"
-          Width="200px"
-          Height="auto"
-          Background="#fff"
-          Padding="16px"
-          BoxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
-          Border="1px solid #0D166B"
-          Radius="4px"
-          FlexDir="column"
-        >
+        <MenuContainer>
           <Text
             Color="#0D166B"
             FontWeight="700"
@@ -55,10 +74,10 @@ export const GlobalHeader = ({ toggleTheme, isDarkMode }: any) => {
           </Text>
           <div className="App">
             <button onClick={toggleTheme}>
-              Switch to {isDarkMode ? "Light" : "Dark"} Mode
+              Cambiar a Modo {isDarkMode ? "Claro" : "Oscuro"}
             </button>
           </div>
-        </ContainerFlex>
+        </MenuContainer>
       )}
     </>
   );

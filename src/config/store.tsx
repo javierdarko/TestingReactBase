@@ -3,8 +3,7 @@ import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
-import EjemploReducer from "../components/MainComponent/Redux/Reducer/EjemploReducer";
-
+import GetPokemonList from "../components/MainComponent/Redux/Reducer/GetPokemonList";
 const persistConfig = {
   key: "root",
   storage,
@@ -12,11 +11,12 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  EjemploReducer: EjemploReducer,
+  GetPokemonList: GetPokemonList
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = createStore(
   persistedReducer,
   composeWithDevTools(applyMiddleware(thunk))

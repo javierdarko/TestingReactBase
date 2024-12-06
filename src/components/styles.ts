@@ -58,7 +58,6 @@ Text.defaultProps = {
   Cursor: "text",
 };
 
-
 export const Image = styled.img<IPropsImage>`
   height: ${(props) => props.Height};
   width: ${(props) => props.Width};
@@ -83,4 +82,34 @@ export const Image = styled.img<IPropsImage>`
   filter: ${(props) => props.Filter};
   align-self: ${(props) => props.Self};
   margin-right: ${(props) => props.MarginRight};
+`;
+
+export const HamburgerMenuIcon = styled(Image)`
+  @media (min-width: 768px) {
+    display: none; /* Oculta el ícono de hamburguesa en pantallas grandes */
+  }
+`;
+
+export const MenuContainer = styled(ContainerFlex)`
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 200px;
+    background: #fff;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #0d166b;
+    border-radius: 4px;
+    flex-direction: column;
+  }
+`;
+
+export const DesktopMenu = styled(ContainerFlex)`
+  display: flex;
+  justify-content: flex-end; /* Alínea el menú principal a la derecha */
+  gap: 16px;
+  @media (max-width: 768px) {
+    display: none; /* Oculta el menú principal en dispositivos móviles */
+  }
 `;
