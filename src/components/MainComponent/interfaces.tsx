@@ -2,7 +2,12 @@ import { AxiosError } from "axios";
 
 export type GetPokemonListState = {
   loading: boolean;
-  data: any;
+  data: ListPokemon[] | any[];
   error: boolean;
-  errorData: AxiosError | null;
+  errorData: null | AxiosError;
 };
+
+export interface ListPokemon {
+  name: string;
+  url: string;
+}

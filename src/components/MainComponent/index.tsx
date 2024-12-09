@@ -1,6 +1,7 @@
 import React from "react";
 import { ContainerFlex, Text } from "../styles";
 import { GlobalHeader } from "./HeaderContainer";
+import { PokeList } from "./PokeList";
 
 export const HomeIndex = ({ toggleTheme, isDarkMode }: any) => {
   return (
@@ -9,12 +10,11 @@ export const HomeIndex = ({ toggleTheme, isDarkMode }: any) => {
       <ContainerFlex Display="flex" Align="center" Justify="center">
         <ContainerFlex
           Border="1px solid red"
-          Width="700px"
-          Height="700px"
           Align="center"
           Justify="center"
         >
           <Text FontSize="24px">Lista Pokémon</Text>
+          <PokeList/>
         </ContainerFlex>
       </ContainerFlex>
     </div>

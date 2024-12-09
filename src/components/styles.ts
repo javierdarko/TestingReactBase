@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
-import { IContainerFlex, IPropsImage, IPropsText } from "./interfaces";
+import {
+  IContainerFlex,
+  IFixedItemContainer,
+  IPropsImage,
+  IPropsText,
+} from "./interfaces";
 
 export const ContainerFlex = styled.div<IContainerFlex>`
   display: ${(props) => props.Display};
+  grid-template-columns: ${(props) => props.GridColumns}
   position: ${(props) => props.Position};
   top: ${(props) => props.PositionTop};
   bottom: ${(props) => props.PositionBottom};
@@ -19,12 +25,49 @@ export const ContainerFlex = styled.div<IContainerFlex>`
   padding${(props) => props.Padding};
   box-shadow: ${(props) => props.BoxShadow};
   flex-direction: ${(props) => props.FlexDir};
+  flex-wrap: ${(props) => props.FlexWrap};
   border-radius: ${(props) => props.Radius};
   gap: ${(props) => props.Gap};
+   overflow-x: ${(props) => props.ScrollX}; 
+  overflow-y: ${(props) => props.ScrollY};  
+  
 `;
 
 ContainerFlex.defaultProps = {
   Display: "flex",
+  Width: "100%",
+  Height: "100%",
+  Justify: "center",
+  Align: "center",
+};
+export const ContainerGrid = styled.div<IContainerFlex>`
+display: grid;
+box-sizing: border-box;
+grid-template-columns: ${(props) => props.GridColumns};
+position: ${(props) => props.Position};
+top: ${(props) => props.PositionTop};
+bottom: ${(props) => props.PositionBottom};
+left: ${(props) => props.PositionLeft};
+right: ${(props) => props.PositionRight};
+overflow: ${(props) => props.Overflow};
+height: ${(props) => props.Height};
+width: ${(props) => props.Width};
+margin: ${(props) => props.Margin};
+border: ${(props) => props.Border};
+background: ${(props) => props.Background};
+justify-content: ${(props) => props.Justify};
+align-items: ${(props) => props.Align};
+padding${(props) => props.Padding};
+box-shadow: ${(props) => props.BoxShadow};
+flex-direction: ${(props) => props.FlexDir};
+flex-wrap: ${(props) => props.FlexWrap};
+border-radius: ${(props) => props.Radius};
+gap: ${(props) => props.Gap};
+ overflow-x: ${(props) => props.ScrollX}; 
+overflow-y: ${(props) => props.ScrollY};  
+
+`;
+ContainerGrid.defaultProps = {
   Width: "100%",
   Height: "100%",
   Justify: "center",
@@ -43,6 +86,7 @@ export const Text = styled.span<IPropsText>`
   letter-spacing: ${(props) => props.LetterSpacing};
   font-family: ${(props) => props.FontFamily};
   cursor: ${(props) => props.Cursor};
+  border: ${(props) => props.Border};
 `;
 
 Text.defaultProps = {
@@ -111,5 +155,21 @@ export const DesktopMenu = styled(ContainerFlex)`
   gap: 16px;
   @media (max-width: 768px) {
     display: none; /* Oculta el menú principal en dispositivos móviles */
+  }
+`;
+
+export const FixedItemContainer = styled.div<IFixedItemContainer>`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: start;
+  align-items: flex-start;
+
+  & > * {
+    flex: 0 1 ${(props) => props.ItemSize || "100px"};
+    height: ${(props) => props.ItemSize || "100px"};
+    text-align: center;
+    overflow: hidden;
+    margin-bottom: 8px;
   }
 `;
