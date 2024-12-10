@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ContainerFlex,
   DesktopMenu,
@@ -10,11 +10,33 @@ import {
 import HamburgerIcon from "../images/menu.svg";
 import IconPoke from "../images/pokemon-23.svg";
 import { MENULIST } from "../constants";
+import { ThemeContextProps } from "./interfaces";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../config/store";
+import { fetchSelectColor } from "./Redux/Actions/SetColorMode";
 
-export const GlobalHeader = ({ toggleTheme, isDarkMode }: any) => {
+export const GlobalHeader = ({
+  isDarkMode,
+  setIsDarkMode,
+}: ThemeContextProps) => {
+  const dispatch = useDispatch<AppDispatch>();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState<boolean>(window.innerWidth >= 768);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    dispatch(fetchSelectColor(isDarkMode));
+  };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -33,50 +55,48 @@ export const GlobalHeader = ({ toggleTheme, isDarkMode }: any) => {
           Cursor="pointer"
         />
         <ContainerFlex Justify="flex-end" Gap="16px" Margin="16px">
-          <HamburgerMenuIcon
-            src={HamburgerIcon}
-            alt="Menu Icon"
-            Width="24px"
-            Height="24px"
-            onClick={toggleMenu}
-            Cursor="pointer"
-          />
-          <DesktopMenu>
-            <Text Color="#F3F3F3" FontWeight="700" Cursor="pointer">
-              {MENULIST.MENU}
-            </Text>
-            <Text Color="#F3F3F3" FontWeight="700" Cursor="pointer">
-              {MENULIST.RANDOM}
-            </Text>
-            <ContainerFlex Justify="start"Width="fit-content">
-              <Text
-                Color="#F3F3F3"
-                FontWeight="700"
-                Cursor="pointer"
-                onClick={toggleTheme}
-              >
-                {MENULIST.MODE}{' '}
-                {isDarkMode ? MENULIST.LIGHT : MENULIST.DARK}
+          {isDesktop ? (
+            <DesktopMenu>
+              <Text Color="#F3F3F3" FontWeight="700" Cursor="pointer">
+                {MENULIST.MENU}
               </Text>
-            </ContainerFlex>
-          </DesktopMenu>
+              <Text Color="#F3F3F3" FontWeight="700" Cursor="pointer">
+                {MENULIST.RANDOM}
+              </Text>
+              <ContainerFlex Justify="start" Width="fit-content">
+                <Text
+                  Color="#F3F3F3"
+                  FontWeight="700"
+                  Cursor="pointer"
+                  onClick={toggleTheme}
+                >
+                  {MENULIST.MODE} {isDarkMode ? MENULIST.LIGHT : MENULIST.DARK}
+                </Text>
+              </ContainerFlex>
+            </DesktopMenu>
+          ) : (
+            <HamburgerMenuIcon
+              src={HamburgerIcon}
+              alt="Menu Icon"
+              Width="24px"
+              Height="24px"
+              onClick={toggleMenu}
+              Cursor="pointer"
+            />
+          )}
         </ContainerFlex>
       </ContainerFlex>
-      {isMenuOpen && (
-        <MenuContainer>
-          <Text
-            Color="#0D166B"
-            FontWeight="700"
-            Cursor="pointer"
-            Margin="8px 0"
-          >
-            PAYMENT
+      {!isDesktop && isMenuOpen && (
+        <MenuContainer Background={"red"}>
+          <Text FontWeight="700" Cursor="pointer">
+            {MENULIST.MENU}
           </Text>
-          <div className="App">
-            <button onClick={toggleTheme}>
-              Cambiar a Modo {isDarkMode ? "Claro" : "Oscuro"}
-            </button>
-          </div>
+          <Text FontWeight="700" Cursor="pointer">
+            {MENULIST.RANDOM}
+          </Text>
+          <Text FontWeight="700" Cursor="pointer" onClick={toggleTheme}>
+            {MENULIST.MODE} {isDarkMode ? MENULIST.LIGHT : MENULIST.DARK}
+          </Text>
         </MenuContainer>
       )}
     </>

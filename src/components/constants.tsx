@@ -5,3 +5,9 @@ export const MENULIST = {
   LIGHT: "Claro",
   DARK: "Oscuro",
 };
+
+export const POKELIST = {
+  TITLE: "Lista de Pokémon",
+  DESCRIPTION: "Busca nombre o número",
+  POKEMON:'Ver Pokémon'
+};

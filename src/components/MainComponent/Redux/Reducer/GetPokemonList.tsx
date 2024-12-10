@@ -3,10 +3,11 @@ import {
   GET_FETCH_POKEMON_ERROR,
   GET_FETCH_POKEMON_START,
   GET_FETCH_POKEMON_SUCCESS,
+  RESET_LIST_POKEMON,
 } from "../Types/types";
-import { GetPokemonListState } from "../../interfaces";
+import { IGetPokemonListState } from "../../interfaces";
 
-const initialState: GetPokemonListState = {
+const initialState: IGetPokemonListState = {
   loading: false,
   data: [],
   error: false,
@@ -16,7 +17,7 @@ const initialState: GetPokemonListState = {
 const GetPokemonList = (
   state = initialState,
   action: { type: string; payload?: AxiosResponse; error?: AxiosError }
-): GetPokemonListState => {
+): IGetPokemonListState => {
   switch (action.type) {
     case GET_FETCH_POKEMON_START:
       return { ...state, loading: true };
@@ -29,7 +30,8 @@ const GetPokemonList = (
         error: true,
         errorData: action.error ?? null,
       };
-
+    case RESET_LIST_POKEMON:
+      return initialState;
     default:
       return state;
   }

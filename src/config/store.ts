@@ -3,12 +3,18 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import GetPokemonList from "../components/MainComponent/Redux/Reducer/GetPokemonList";
+import getPokemonListSearch from "../components/MainComponent/Redux/Reducer/GetPokemonSearch";
+import SetColorMode from "../components/MainComponent/Redux/Reducer/SetColorMode";
+
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["getPokemonListSearch", "GetPokemonList"],
 };
 const rootReducer = combineReducers({
-  GetPokemonList:GetPokemonList,
+  GetPokemonList: GetPokemonList,
+  getPokemonListSearch: getPokemonListSearch,
+  SetColorMode: SetColorMode,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
