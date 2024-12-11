@@ -1,18 +1,45 @@
-import { ContainerFlex, ContainerGrid, Text } from "../styles";
+import { ButtonGenerals, ContainerFlex, ContainerGrid, Text } from "../styles";
 import { ListPokemon } from "./interfaces";
 import { POKELIST } from "../constants";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../config/store";
-import { getPokemonListSearch } from "./Redux/Actions/getPokemonSearch";
+import {
+  getPokemonListDescription,
+  getPokemonListSearchByUrl,
+} from "./Redux/Actions/getPokemonSearch";
+import { useNavigate } from "react-router-dom";
+import { getPokemonListAction } from "./Redux/Actions/GetPokemonList";
+import { useEffect } from "react";
+import { url } from "inspector";
 
 export const PokeList = ({ pokemonList }: { pokemonList: ListPokemon[] }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const handlePokemon = (url: string) => {
-    dispatch(getPokemonListSearch(url));
+  const navigate = useNavigate();
+  const formatPokemonName = (name: string) => {
+    return name
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
   };
-
+  const handlePokemon = (data: ListPokemon) => {
+    dispatch(getPokemonListSearchByUrl(data.url));
+    dispatch(getPokemonListDescription(url.name));
+    navigate("/PokemonDetails");
+  };
+  useEffect(() => {
+    dispatch(getPokemonListAction());
+  }, [dispatch]);
   return (
-    <ContainerFlex FlexWrap="wrap" ScrollY="scroll">
+    <ContainerFlex
+      Justify="start"
+      Align="start"
+      FlexWrap="wrap"
+      OverflowY="scroll"
+      Height="450px"
+      Border="2px solid #FF2400"
+      Radius="4px"
+      Margin="16px"
+      Gap="4px"
+    >
       {pokemonList.length > 0 ? (
         pokemonList.map((item: ListPokemon, index: number) => (
           <ContainerGrid
@@ -21,21 +48,18 @@ export const PokeList = ({ pokemonList }: { pokemonList: ListPokemon[] }) => {
             Justify="start"
             Height="60px"
             Width="300px"
-            Border="yellow 1px solid"
             FlexWrap="wrap"
           >
-            <Text Margin="8px">{item.name}</Text>
-            <Text
-              Margin="8px"
-              onClick={() => handlePokemon(item.url)}
-              Cursor="pointer"
-            >
+            <Text Margin="8px">{formatPokemonName(item.name)}</Text>
+            <ButtonGenerals onClick={() => handlePokemon(item)}>
               {POKELIST.POKEMON}
-            </Text>
+            </ButtonGenerals>
           </ContainerGrid>
         ))
       ) : (
-        <Text>No se encontraron Pokémon que coincidan con la búsqueda.</Text>
+        <ContainerFlex>
+          <Text>No se encontraron Pokémon que coincidan con la búsqueda.</Text>
+        </ContainerFlex>
       )}
     </ContainerFlex>
   );

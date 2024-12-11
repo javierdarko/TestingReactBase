@@ -12,6 +12,7 @@ export interface IContainerFlex {
   Margin?: string;
   Border?: string;
   Background?: string;
+  HoverBackground?: string;
   Justify?: string;
   Align?: string;
   Padding?: string;
@@ -20,8 +21,10 @@ export interface IContainerFlex {
   FlexWrap?: string;
   Radius?: string;
   Gap?: string;
-  ScrollX?: string;
-  ScrollY?: string;
+  OverflowX?: string;
+  OverflowY?: string;
+  Cursor?: string;
+  TextAlign?: string;
 }
 export interface IContainerGrid {
   Position?: string;
@@ -62,6 +65,9 @@ export interface IPropsText {
   FontFamily?: string;
   Cursor?: string;
   Border?: string;
+  TextDecoration?: string;
+  DecorationColor?: string;
+  
 }
 
 export interface IPropsImage {
@@ -94,35 +100,10 @@ export interface IPropsImage {
 export interface IFixedItemContainer {
   ItemSize?: string;
 }
-export interface IPropsInput {
-  error?: string | undefined | boolean;
-  Radius?: string;
-  TextAlign?: string;
-  Height?: string;
-  Margin?: string;
-  Width?: string;
-  Padding?: string;
+export interface IStyledInput {
+  Background?: string;
+  BackG?: string;
   Color?: string;
-  Cursor?: string;
-  FontSize?: string;
-  FontFamily?: string;
-  HolderColor?: string;
-  HolderFontSize?: string;
-  HolderHeight?: string;
-  HolderWeight?: string;
-  Outline?: string;
-  RadiusTR?: string;
-  RadiusBR?: string;
-  disabledBackG?: string;
-  BackGroundColor?: string;
-  FontWeight?: string;
-
-  hasError?: boolean;
-  helperText?: string;
-  disabled?: boolean;
-  placeholder?: string;
-  MarginTop?: string;
-  MarginLeft?: string;
 }
 export interface IPropsButtonGenerals {
   Justify?: string;
@@ -176,6 +157,7 @@ export interface IPropsButtonGenerals {
 export interface IPropsSearchInput {
   Display?: string;
   Flex?: string;
+  Background?: string;
   BackG?: string;
   Height?: string;
   Width?: string;
@@ -205,4 +187,5 @@ export interface IPropsSearchInput {
   OverFlow?: string;
   widthInput?: string;
   ColumnGap?: string;
+  IBackground?: string;
 }

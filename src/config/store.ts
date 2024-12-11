@@ -4,7 +4,6 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import GetPokemonList from "../components/MainComponent/Redux/Reducer/GetPokemonList";
 import getPokemonListSearch from "../components/MainComponent/Redux/Reducer/GetPokemonSearch";
-import SetColorMode from "../components/MainComponent/Redux/Reducer/SetColorMode";
 
 const persistConfig = {
   key: "root",
@@ -14,7 +13,6 @@ const persistConfig = {
 const rootReducer = combineReducers({
   GetPokemonList: GetPokemonList,
   getPokemonListSearch: getPokemonListSearch,
-  SetColorMode: SetColorMode,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({

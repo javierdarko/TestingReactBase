@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 import {
   IContainerFlex,
   IFixedItemContainer,
-  IPropsButtonGenerals,
   IPropsImage,
-  IPropsInput,
   IPropsSearchInput,
   IPropsText,
 } from "./interfaces";
@@ -25,14 +23,19 @@ export const ContainerFlex = styled.div<IContainerFlex>`
   background: ${(props) => props.Background};
   justify-content: ${(props) => props.Justify};
   align-items: ${(props) => props.Align};
-  padding${(props) => props.Padding};
+  padding:${(props) => props.Padding};
   box-shadow: ${(props) => props.BoxShadow};
   flex-direction: ${(props) => props.FlexDir};
   flex-wrap: ${(props) => props.FlexWrap};
   border-radius: ${(props) => props.Radius};
   gap: ${(props) => props.Gap};
-   overflow-x: ${(props) => props.ScrollX}; 
-  overflow-y: ${(props) => props.ScrollY};  
+   overflow-x: ${(props) => props.OverflowX}; 
+  overflow-y: ${(props) => props.OverflowY};  
+  cursor: ${(props) => props.Cursor};
+  text-align: ${(props) => props.TextAlign}
+    &:hover {
+    background: ${(props) => props.HoverBackground};
+  }
   
 `;
 
@@ -44,31 +47,31 @@ ContainerFlex.defaultProps = {
   Align: "center",
 };
 export const ContainerGrid = styled.div<IContainerFlex>`
-display: grid;
-box-sizing: border-box;
-grid-template-columns: ${(props) => props.GridColumns};
-position: ${(props) => props.Position};
-top: ${(props) => props.PositionTop};
-bottom: ${(props) => props.PositionBottom};
-left: ${(props) => props.PositionLeft};
-right: ${(props) => props.PositionRight};
-overflow: ${(props) => props.Overflow};
-height: ${(props) => props.Height};
-width: ${(props) => props.Width};
-margin: ${(props) => props.Margin};
-border: ${(props) => props.Border};
-background: ${(props) => props.Background};
-justify-content: ${(props) => props.Justify};
-align-items: ${(props) => props.Align};
-padding${(props) => props.Padding};
-box-shadow: ${(props) => props.BoxShadow};
-flex-direction: ${(props) => props.FlexDir};
-flex-wrap: ${(props) => props.FlexWrap};
-border-radius: ${(props) => props.Radius};
-gap: ${(props) => props.Gap};
- overflow-x: ${(props) => props.ScrollX}; 
-overflow-y: ${(props) => props.ScrollY};  
-
+  display: grid;
+  box-sizing: border-box;
+  grid-template-columns: ${(props) => props.GridColumns};
+  position: ${(props) => props.Position};
+  top: ${(props) => props.PositionTop};
+  bottom: ${(props) => props.PositionBottom};
+  left: ${(props) => props.PositionLeft};
+  right: ${(props) => props.PositionRight};
+  overflow: ${(props) => props.Overflow};
+  height: ${(props) => props.Height};
+  width: ${(props) => props.Width};
+  margin: ${(props) => props.Margin};
+  border: ${(props) => props.Border};
+  background: ${(props) => props.Background};
+  justify-content: ${(props) => props.Justify};
+  align-items: ${(props) => props.Align};
+  padding: ${(props) => props.Padding};
+  box-shadow: ${(props) => props.BoxShadow};
+  flex-direction: ${(props) => props.FlexDir};
+  flex-wrap: ${(props) => props.FlexWrap};
+  border-radius: ${(props) => props.Radius};
+  gap: ${(props) => props.Gap};
+  overflow-x: ${(props) => props.OverflowX};
+  overflow-y: ${(props) => props.OverflowY};
+  cursor: ${(props) => props.Cursor};
 `;
 ContainerGrid.defaultProps = {
   Width: "100%",
@@ -90,6 +93,11 @@ export const Text = styled.span<IPropsText>`
   font-family: ${(props) => props.FontFamily};
   cursor: ${(props) => props.Cursor};
   border: ${(props) => props.Border};
+
+  &:hover {
+    text-decoration: ${(props) => props.TextDecoration};
+    text-decoration-color: ${(props) => props.DecorationColor};
+  }
 `;
 
 Text.defaultProps = {
@@ -140,14 +148,11 @@ export const HamburgerMenuIcon = styled(Image)`
 export const MenuContainer = styled(ContainerFlex)`
   @media (max-width: 768px) {
     position: absolute;
-    top: 40px;
+    top: 60px;
     right: 0;
-    width: 183px;
+    width: 210px;
     height: auto;
-    padding: 8px;
-    gap: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
     flex-direction: column;
     justify-content: start;
     align-items: start;
@@ -158,7 +163,8 @@ export const MenuContainer = styled(ContainerFlex)`
 export const DesktopMenu = styled(ContainerFlex)`
   display: flex;
   justify-content: flex-end;
-  gap: 16px;
+  width: auto;
+  height: 60px;
   @media (max-width: 768px) {
     display: none;
   }
@@ -179,170 +185,9 @@ export const FixedItemContainer = styled.div<IFixedItemContainer>`
     margin-bottom: 8px;
   }
 `;
-export const Input = styled.input<IPropsInput>`
-  background: ${(props) => props.BackGroundColor} 0% 0% no-repeat padding-box;
-  border: ${(props) =>
-    props.error ? "1px solid #A82424" : "1px solid #E8E9EA"};
-  border-radius: ${(props) => props.Radius};
-  text-align: ${(props) => props.TextAlign};
-  opacity: 1;
-  height: ${(props) => props.Height};
-  margin: ${(props) => props.Margin};
-  margin-left: ${(props) => props.MarginLeft};
-  width: ${(props) => props.Width};
-  padding: ${(props) => props.Padding};
-  color: ${(props) => props.Color};
-  cursor: ${(props) => props.Cursor};
-  font-size: ${(props) => props.FontSize};
-  font-family: ${(props) => props.FontFamily};
-  outline: ${(props) => props.Outline};
-  font-weight: ${(props) => props.FontWeight};
-  border-top-right-radius: ${(props) => props.RadiusTR};
-  border-bottom-right-radius: ${(props) => props.RadiusBR};
-  box-sizing: border-box;
-  margin-top: ${(props) => props.MarginTop};
-  ::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  :-webkit-autofill,
-  :-webkit-autofill:hover,
-  :-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  }
-  ${(props) =>
-    props.disabled
-      ? `&:disabled{
-            border-color: #E8E9EA;
-            background-color: ${props.disabledBackG || "#F4F5F5"};
-        }`
-      : `&:focus {
-                border-color: ${props.error ? "#ef4f55" : "#5A5AFF"};
-        }
-        &:hover {
-            border-color: ${props.error ? "#ef4f55" : "#5A5AFF"};
-        }`}
-  &::placeholder {
-    color: ${(props) => props.HolderColor};
-    font-size: ${(props) => props.HolderFontSize};
-    line-height: ${(props) => props.HolderHeight};
-    font-weight: ${(props) => props.HolderWeight};
-  }
-`;
-Input.defaultProps = {
-  Margin: "0",
-  Height: "40px",
-  Width: "100%",
-  Cursor: "pointer",
-  HolderHeight: "",
-  HolderWeight: "400",
-  FontWeight: "400",
-  HolderFontSize: "1rem",
-  FontSize: "1rem",
-  HolderColor: "#cbced1",
-  Radius: "32px",
-  Padding: "8px 16px",
-  Color: "#050505",
-  Outline: "none",
-  BackGroundColor: "#fff",
-};
-
-export const ButtonGenerals = styled.button<IPropsButtonGenerals>`
-  display: flex;
-  justify-content: ${(props) => props.Justify};
-  border: ${(props) =>
-    props.SecondaryButton ? "1px solid #5A5AFF" : props.Border};
-  text-transform: ${(props) => props.Transform};
-  border-radius: ${(props) => props.Radius};
-  width: ${(props) => props.Width};
-  padding: ${(props) => props.Padding};
-  height: ${(props) => props.Height};
-  min-height: ${(props) => props.MHeight};
-  font-family: ${(props) => props.FontFamily};
-  font-size: ${(props) => props.FontSize};
-  font-weight: ${(props) => props.FontWeight};
-  align-items: center;
-  align-self: ${(props) => props.Self};
-  margin: ${(props) => props.Margin};
-  background-color: ${(props) =>
-    props.SecondaryButton ? "#FFFFFF" : props.BackGC};
-  margin-top: ${(props) => props.MT};
-  box-shadow: ${(props) => props.BS};
-  color: ${(props) => (props.SecondaryButton ? "#5A5AFF" : props.Color)};
-  position: ${(props) => props.Position};
-  cursor: ${(props) => props.Cursor};
-  gap: ${(props) => props.Gap};
-  top: ${(props) => props.Top};
-  left: ${(props) => props.Left};
-  border-top-left-radius: ${(props) => props.RadiusTL};
-  border-bottom-left-radius: ${(props) => props.RadiusBL};
-  border-right: ${(props) => props.BorderR};
-  border-left: ${(props) => props.BorderL};
-  border-top: ${(props) => props.BorderT};
-  border-bottom: ${(props) => props.BorderB};
-
-  &:hover {
-    border-color: ${(props) => props.HBorder};
-    border: ${(props) => props.BorderH};
-    color: ${(props) => props.HColor};
-    box-shadow: ${(props) => props.HShadow};
-    background-color: ${(props) =>
-      props.SecondaryButton ? "#E5E5FF" : props.HBackG};
-  }
-
-  &:disabled {
-    background-color: ${(props) => props.DBackG};
-    border: ${(props) => props.DBorder};
-    color: ${(props) => props.DColor};
-    font-weight: ${(props) => props.DFontWeight};
-    box-shadow: ${(props) => props.HDBox};
-    cursor: ${(props) => props.DCursor};
-  }
-
-  &[disabled]:hover {
-    border: ${(props) => props.HDBorder};
-    color: ${(props) => props.HDColor};
-    box-shadow: ${(props) => props.HDBox};
-  }
-
-  &:hover svg path {
-    fill: ${(props) => props.FillIcon};
-  }
-
-  &:hover span {
-    color: ${(props) => (props.SecondaryButton ? "#5A5AFF" : props.HText)};
-  }
-
-  span {
-    color: ${(props) => props.TextColor};
-  }
-`;
-
-ButtonGenerals.defaultProps = {
-  Height: "40px",
-  Justify: "center",
-  Radius: "32px",
-  FontSize: "16px",
-  BackGC: "#5A5AFF",
-  Padding: "8px 16px",
-  Gap: "8px",
-  Transform: "",
-  HBackG: "#0D166B",
-  DBackG: "#E8E9EA",
-  DBorder: "none",
-  Color: "#FFFFFF",
-  Border: "none",
-  DColor: "#a1a5aa",
-  DCursor: "default",
-  Cursor: "pointer",
-  FontWeight: "700",
-  FillIcon: "#FFFFFF",
-  FontFamily: "Nunito",
-};
 
 export const SearchInput = styled.div<IPropsSearchInput>`
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: ${(props) => props.Background};
   background-color: ${(props) => props.BackG};
   justify-content: ${(props) => props.Justify};
   width: ${(props) => props.Width};
@@ -366,6 +211,8 @@ export const SearchInput = styled.div<IPropsSearchInput>`
   column-gap: ${(props) => props.ColumnGap};
   overflow: ${(props) => props.OverFlow};
   & > input {
+    background: ${(props) => props.Background};
+    background-color: ${(props) => props.BackG};
     border: none;
     outline: none;
     font-size: ${(props) => props.FontSize};
@@ -392,10 +239,14 @@ export const SearchInput = styled.div<IPropsSearchInput>`
     }
   }
   &:hover {
+    background: ${(props) => props.Background};
+    background-color: ${(props) => props.BackG};
     border-color: ${(props) => (props.error ? "#ef4f55" : "#5A5AFF")};
     box-shadow: ${(props) => props.BoxShadowH};
   }
   &:focus-within {
+    background: ${(props) => props.Background};
+    background-color: ${(props) => props.BackG};
     border-color: ${(props) => (props.error ? "#ef4f55" : "#5A5AFF")};
     box-shadow: ${(props) => props.BoxShadowF};
   }
@@ -424,3 +275,26 @@ SearchInput.defaultProps = {
   FontSize: "1rem",
   widthInput: "inherit",
 };
+
+export const ButtonGenerals = styled.button`
+  padding: 8px;
+  background-color: #ff2400;
+  color: white;
+  border: 1px solid #ff2400;
+  border-radius: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 40px;
+  text-align: center;
+
+  &:hover {
+    background-color: #cc1e00;
+    border-color: #cc1e00;
+  }
+
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+`;

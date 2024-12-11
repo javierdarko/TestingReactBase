@@ -17,6 +17,7 @@ export type IGetPokemonListSearch = {
   error: boolean;
   errorData: null | AxiosError;
   dataInput: string;
+  dataInfo: any;
 };
 
 export interface ListPokemon {
@@ -40,8 +41,28 @@ export interface IPokemonDetails {
   moves: Move[];
   species: NamedAPIResource;
   sprites: Sprites;
+  stats: StatItem[];
+  types: PokemonType[];
+}
+interface Stat {
+  name: string;
+  url: string;
 }
 
+interface StatItem {
+  base_stat: number;
+  effort: number;
+  stat: Stat;
+}
+interface Type {
+  name: string;
+  url: string;
+}
+
+interface PokemonType {
+  slot: number;
+  type: Type;
+}
 interface Ability {
   is_hidden: boolean;
   slot: number;
