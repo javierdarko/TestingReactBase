@@ -25,6 +25,7 @@ export interface IContainerFlex {
   OverflowY?: string;
   Cursor?: string;
   TextAlign?: string;
+  BorderBottom?: string;
 }
 export interface IContainerGrid {
   Position?: string;
@@ -67,7 +68,6 @@ export interface IPropsText {
   Border?: string;
   TextDecoration?: string;
   DecorationColor?: string;
-  
 }
 
 export interface IPropsImage {

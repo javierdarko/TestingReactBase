@@ -32,6 +32,7 @@ export const ContainerFlex = styled.div<IContainerFlex>`
    overflow-x: ${(props) => props.OverflowX}; 
   overflow-y: ${(props) => props.OverflowY};  
   cursor: ${(props) => props.Cursor};
+  border-bottom: ${(props) => props.BorderBottom};
   text-align: ${(props) => props.TextAlign}
     &:hover {
     background: ${(props) => props.HoverBackground};

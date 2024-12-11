@@ -3,14 +3,11 @@ import { ListPokemon } from "./interfaces";
 import { POKELIST } from "../constants";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../config/store";
-import {
-  getPokemonListDescription,
-  getPokemonListSearchByUrl,
-} from "./Redux/Actions/getPokemonSearch";
+import { getPokemonListSearchByUrl } from "./Redux/Actions/getPokemonSearch";
 import { useNavigate } from "react-router-dom";
 import { getPokemonListAction } from "./Redux/Actions/GetPokemonList";
 import { useEffect } from "react";
-import { url } from "inspector";
+import { getPokemonListDescription } from "./Redux/Actions/DescriptionPokemon";
 
 export const PokeList = ({ pokemonList }: { pokemonList: ListPokemon[] }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,7 +19,7 @@ export const PokeList = ({ pokemonList }: { pokemonList: ListPokemon[] }) => {
   };
   const handlePokemon = (data: ListPokemon) => {
     dispatch(getPokemonListSearchByUrl(data.url));
-    dispatch(getPokemonListDescription(url.name));
+    dispatch(getPokemonListDescription(data.name));
     navigate("/PokemonDetails");
   };
   useEffect(() => {
@@ -58,7 +55,9 @@ export const PokeList = ({ pokemonList }: { pokemonList: ListPokemon[] }) => {
         ))
       ) : (
         <ContainerFlex>
-          <Text>No se encontraron Pokémon que coincidan con la búsqueda.</Text>
+          <Text FontSize="24px" FontWeight="700">
+            {POKELIST.ERROR}
+          </Text>
         </ContainerFlex>
       )}
     </ContainerFlex>

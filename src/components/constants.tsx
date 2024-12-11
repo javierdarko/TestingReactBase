@@ -12,16 +12,16 @@ export const POKELIST = {
   TITLE: "Lista de Pokémon",
   DESCRIPTION: "Busca nombre o número",
   POKEMON: "Ver Pokémon",
+  ERROR: "No se encontraron Pokémon que coincidan con la búsqueda.",
 };
 
 export const DETAILSPOKEMON = {
   RETURN: "Regresar",
-  NUMBER: "N° Pokédex: ",
+  NUMBER: "N° Pokédex: #",
   ABILITIES: "Habilidades: ",
   MOVESET: "Movimientos: ",
   TYPE: "Tipo: ",
   WEIGHT: "Peso: ",
-
 };
 
 export type StatName =

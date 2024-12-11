@@ -23,6 +23,14 @@ export const PokemonDetails = () => {
     (state: RootState) =>
       state.getPokemonListSearch.data || defaultPokemonDetails
   );
+  const DescriptionPokemon = useSelector(
+    (state: RootState) => state.getPokemonListSearch.dataInfo
+  );
+  const DescriptionSpanish =
+    DescriptionPokemon?.flavor_text_entries?.filter(
+      (entry: { language: { name: string } }) => entry.language.name === "es"
+    ) ?? [];
+  console.log(DescriptionSpanish);
   const formatPokemonName = (name: string) => {
     return name
       .replace(/-/g, " ")
@@ -69,11 +77,14 @@ export const PokemonDetails = () => {
           Gap="4px"
           Radius=" 16px 0 0 16px"
           Background="#00BFFF"
+          Padding="16px"
         >
-          <Text FontSize="24px" TextAlign="center">
+          <Text FontSize="24px" TextAlign="center" FontWeight="700">
             {formatPokemonName(Pokemon?.name)}
           </Text>
-          <Text TextAlign="center">{DETAILSPOKEMON.NUMBER + Pokemon.id}</Text>
+          <Text FontWeight="700" TextAlign="center">
+            {DETAILSPOKEMON.NUMBER + Pokemon.id}
+          </Text>
           <ContainerFlex
             Background="#FFFFFF"
             Width="200px"
@@ -98,6 +109,7 @@ export const PokemonDetails = () => {
             )}
           </ContainerFlex>
           <Text
+            FontWeight="700"
             TextDecoration="underline"
             Cursor="pointer"
             onClick={toggleShiny}
@@ -107,32 +119,43 @@ export const PokemonDetails = () => {
           </Text>
           <ContainerFlex FlexDir="column" Gap="4px" Width="300px">
             {Pokemon?.stats?.map((stat, index) => (
-              <Text key={index}>
+              <Text key={index} FontWeight="700">
                 {STAT_NAMES[stat.stat.name as StatName]}: {stat.base_stat}
               </Text>
             ))}
-            <Text>
+            <Text FontWeight="700">
               {DETAILSPOKEMON.TYPE}
               {Pokemon?.types?.map((type, index) => (
-                <Text key={index}>
+                <Text FontWeight="700" key={index}>
                   {formatPokemonName(type.type.name)}
                   {index < Pokemon.types.length - 1 && ", "}
                 </Text>
               ))}
             </Text>
-            <Text>{DETAILSPOKEMON.WEIGHT + formatWeight(Pokemon.weight)}</Text>
+            <Text FontWeight="700">
+              {DETAILSPOKEMON.WEIGHT + formatWeight(Pokemon.weight)}
+            </Text>
           </ContainerFlex>
         </ContainerFlex>
         <ContainerFlex
           Justify="start"
           Align="start"
-          Padding="16px 0"
+          Padding="16px"
           Gap="4px"
           Width="auto"
           FlexDir="column"
         >
           <ContainerFlex Justify="start" FlexWrap="wrap" Gap="4px">
-            <Text>{DETAILSPOKEMON.ABILITIES}</Text>
+            {DescriptionSpanish?.slice(0, 5).map((type: any, index: number) => (
+              <Text
+                FontWeight="700"
+                key={index}
+              >{`"${type.flavor_text}"`}</Text>
+            ))}
+          </ContainerFlex>
+          <ContainerFlex BorderBottom="1px solid #00BFFF" />
+          <ContainerFlex Justify="start" FlexWrap="wrap" Gap="4px">
+            <Text FontWeight="700">{DETAILSPOKEMON.ABILITIES}</Text>
             {Pokemon?.abilities?.map((type, index) => (
               <Text key={index}>
                 {formatPokemonName(type.ability.name)}
@@ -141,7 +164,7 @@ export const PokemonDetails = () => {
             ))}
           </ContainerFlex>
           <ContainerFlex Justify="start" FlexWrap="wrap" Gap="4px">
-            <Text>{DETAILSPOKEMON.MOVESET}</Text>
+            <Text FontWeight="700">{DETAILSPOKEMON.MOVESET}</Text>
             {Pokemon?.moves?.slice(0, 50).map((type, index) => (
               <Text key={index}>
                 {formatPokemonName(type.move.name)}

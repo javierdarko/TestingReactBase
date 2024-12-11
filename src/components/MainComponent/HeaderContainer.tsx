@@ -17,6 +17,7 @@ import {
 } from "./Redux/Actions/getPokemonSearch";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../config/store";
+import { getPokemonListDescription } from "./Redux/Actions/DescriptionPokemon";
 
 export const GlobalHeader = ({
   isDarkMode,
@@ -57,6 +58,7 @@ export const GlobalHeader = ({
       const randomPokemon = PokedexList[randomIndex];
       if (randomPokemon?.url) {
         dispatch(getPokemonListSearchByUrl(randomPokemon.url));
+        dispatch(getPokemonListDescription(randomPokemon.name));
         navigate("/PokemonDetails");
         setIsMenuOpen(false);
       }
